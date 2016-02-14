@@ -60,10 +60,14 @@ describe('Slug directive', function () {
         expect(element.controller('slug').preferOwn).toBe(true);
     });
 
-    it('updates the model value when user changes it in the slug field itself', function () {
+    it('updates the model value when user changes it in the slug field itself', function (done) {
         element.val('This is not automatically generated slug').triggerHandler('input');
 
-        expect($rootScope.slug).toBe('this-is-not-automatically-generated-slug');
-        expect($rootScope.slugSrc).toBe('');
+        setTimeout(function () {
+            expect($rootScope.slug).toBe('this-is-not-automatically-generated-slug');
+            expect($rootScope.slugSrc).toBe('');
+
+            done();
+        }, 300);
     });
 });

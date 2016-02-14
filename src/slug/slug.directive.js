@@ -30,12 +30,11 @@
             });
         }
 
-        // TODO: Debounce input handler
-        $element.on('input', function () {
+        $element.on('input', debounce(function () {
             $scope.$apply(function () {
                 setModelValue($element.val());
             });
-        });
+        }, 250));
 
         $scope.$on('$destroy', function () {
             $element.off('input');
@@ -51,5 +50,28 @@
             ngModelCtrl.$setViewValue(slugService.generateSlug(value));
             ngModelCtrl.$render();
         }
+    }
+
+    function debounce(func, wait, immediate) {
+        var timeout;
+        return function () {
+            var context = this;
+            var args = arguments;
+
+            var later = function () {
+                timeout = null;
+                if (!immediate) {
+                    func.apply(context, args);
+                }
+            };
+
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+
+            if (callNow) {
+                func.apply(context, args);
+            }
+        };
     }
 })();
