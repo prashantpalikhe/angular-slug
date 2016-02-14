@@ -59,4 +59,11 @@ describe('Slug directive', function () {
     it('prefers own value by default', function () {
         expect(element.controller('slug').preferOwn).toBe(true);
     });
+
+    it('updates the model value when user changes it in the slug field itself', function () {
+        element.val('This is not automatically generated slug').triggerHandler('input');
+
+        expect($rootScope.slug).toBe('this-is-not-automatically-generated-slug');
+        expect($rootScope.slugSrc).toBe('');
+    });
 });
