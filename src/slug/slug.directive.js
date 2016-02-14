@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('slug', [])
+        .module('slug')
         .directive('slug', slugDirective);
 
     function slugDirective() {
