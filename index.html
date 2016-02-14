@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Angular slug</title>
+    <meta name="description" content="Angular directive that works with ng-model to automatically generate a slug.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body ng-controller="AppController as appVm">
+    <div class="container">
+        <h1>Create an article</h1>
+
+        <form>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input class="form-control" id="title" type="text" ng-model="appVm.slugSrc" required>
+            </div>
+
+            <div class="form-group">
+                <label for="slug">Slug</label>
+                <input class="form-control" type="text" ng-model="appVm.slug" slug-src="{{ appVm.slugSrc }}" slug required>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Create article</button>
+        </form>
+
+        <h2>App vm</h2>
+
+        <pre>
+{
+    slugSrc: '{{ appVm.slugSrc }}',
+    slug: '{{ appVm.slug }}'
+}
+        </pre>
+    </div>
+
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="dist/all.js"></script>
+
+    <script>
+        angular
+                .module('app', ['slug'])
+                .controller('AppController', function () {
+                    var vm = this;
+
+                    vm.slug = '';
+                    vm.slugSrc = '';
+                });
+    </script>
+</body>
+</html>
