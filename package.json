@@ -1,7 +1,7 @@
 {
     "name": "angular-slug",
     "version": "1.0.0",
-    "description": "Angular component that works with ng-model to automatically generate a slug.",
+    "description": "Angular directive that works with ng-model to automatically generate a slug.",
     "main": "index.js",
     "scripts": {
         "test": "karma start"
